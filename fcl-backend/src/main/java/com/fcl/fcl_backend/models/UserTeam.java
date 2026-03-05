@@ -20,11 +20,16 @@ public class UserTeam {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "league_id", nullable = false)
+    private League league;
+
     public UserTeam() {}
 
-    public UserTeam(String teamName, User user) {
+    public UserTeam(String teamName, User user, League league) {
         this.teamName = teamName;
         this.user = user;
+        this.league = league;
     }
 
     public Long getId() {
