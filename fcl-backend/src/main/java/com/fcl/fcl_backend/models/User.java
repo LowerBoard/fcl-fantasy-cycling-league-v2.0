@@ -1,6 +1,9 @@
 package com.fcl.fcl_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -19,6 +22,10 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserTeam> userTeams;
+
     public User() {}
 
     public User(String username, String email, String password) {
@@ -33,6 +40,14 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<UserTeam> getUserTeams() {
+        return userTeams;
+    }
+
+    public void setUserTeams(List<UserTeam> userTeams) {
+        this.userTeams = userTeams;
     }
 
     public String getUsername() {

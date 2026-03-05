@@ -1,5 +1,6 @@
 package com.fcl.fcl_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class League {
 
     private String leagueCode; // unique code for joining the league
 
+    @JsonManagedReference // This annotation is used to manage the bidirectional relationship between League and UserTeam. It prevents infinite recursion during JSON serialization by marking this side of the relationship as the "managed" side.
     @OneToMany(mappedBy = "league", cascade = CascadeType.ALL)
     private List<UserTeam> userTeams;
 
