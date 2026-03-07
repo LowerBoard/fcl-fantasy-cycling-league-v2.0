@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/teams")
+@CrossOrigin // This annotation allows cross-origin requests from the frontend (which is likely running on a different port)
 public class UserTeamController {            // This controller will handle requests related to user teams, such as creating a team, adding riders to a team, and calculating team points.
 
     @Autowired

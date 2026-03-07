@@ -17,7 +17,7 @@ public class Roster {
     @JoinColumn(name = "race_id", nullable = false)
     private Race race;
 
-    @JsonBackReference
+    @JsonBackReference("team-rosters") // This annotation is used to manage the bidirectional relationship between Roster and UserTeam. It prevents infinite recursion during JSON serialization by marking this side of the relationship as the "back" side.)
     @ManyToOne
     @JoinColumn(name = "user_team_id", nullable = false)
     private UserTeam userTeam;

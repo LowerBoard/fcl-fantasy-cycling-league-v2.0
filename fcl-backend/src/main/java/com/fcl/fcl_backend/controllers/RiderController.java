@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController // tells Spring that this class is a REST controller and should handle HTTP requests
 @RequestMapping("/api/riders")
+@CrossOrigin //
 public class RiderController {
     @Autowired
     private RiderRepository riderRepository;

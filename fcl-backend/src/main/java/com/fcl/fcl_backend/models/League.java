@@ -18,7 +18,7 @@ public class League {
 
     private String leagueCode; // unique code for joining the league
 
-    @JsonManagedReference // This annotation is used to manage the bidirectional relationship between League and UserTeam. It prevents infinite recursion during JSON serialization by marking this side of the relationship as the "managed" side.
+    @JsonManagedReference("league-teams") // This annotation is used to manage the bidirectional relationship between League and UserTeam. It prevents infinite recursion during JSON serialization by marking this side of the relationship as the "managed" side.
     @OneToMany(mappedBy = "league", cascade = CascadeType.ALL)
     private List<UserTeam> userTeams;
 

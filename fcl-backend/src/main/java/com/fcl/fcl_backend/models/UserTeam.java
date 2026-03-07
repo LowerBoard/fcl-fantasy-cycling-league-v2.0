@@ -1,7 +1,10 @@
 package com.fcl.fcl_backend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table (name="user_teams")
@@ -17,15 +20,19 @@ public class UserTeam {
     @Column
     private Double totalPoints = 0.0;
 
-    @JsonBackReference
+    @JsonBackReference("user-teams") // This annotation is used to manage the bidirectional relationship between UserTeam and User. It prevents infinite recursion during JSON serialization by marking this side of the relationship as the "back" side.
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @JsonBackReference // This annotation is used to manage the bidirectional relationship between UserTeam and League. It prevents infinite recursion during JSON serialization by marking this side of the relationship as the "back" side.
+    @JsonBackReference("league-teams") // This annotation is used to manage the bidirectional relationship between UserTeam and League. It prevents infinite recursion during JSON serialization by marking this side of the relationship as the "back" side.
     @ManyToOne
     @JoinColumn(name = "league_id", nullable = false)
     private League league;
+
+    @JsonManagedReference("team-rosters") // This annotation is used to manage the bidirectional relationship between UserTeam and Roster. It prevents infinite recursion during JSON serialization by marking this side of the relationship as the "managed" side.
+    @OneToMany(mappedBy = "userTeam", cascade = CascadeType.ALL)
+    private List<Roster> rosters;
 
     public UserTeam() {}
 

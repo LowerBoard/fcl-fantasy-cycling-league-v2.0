@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/leagues")
+@CrossOrigin // This annotation allows cross-origin requests from the frontend (which is likely running on a different port)
 public class LeagueController {
 
     @Autowired

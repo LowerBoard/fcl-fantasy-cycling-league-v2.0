@@ -22,7 +22,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @JsonManagedReference
+    @JsonManagedReference("user-teams")
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserTeam> userTeams;
 

@@ -3,13 +3,11 @@ package com.fcl.fcl_backend.controllers;
 import com.fcl.fcl_backend.models.User;
 import com.fcl.fcl_backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin // This annotation allows cross-origin requests from the frontend (which is likely running on a different port)
 public class UserController {
 
     @Autowired

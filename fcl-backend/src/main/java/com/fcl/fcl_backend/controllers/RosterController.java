@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/rosters")
-@CrossOrigin
+@CrossOrigin // Allow cross-origin requests from any domain (you can specify allowed origins if needed)
 public class RosterController {
 
     @Autowired
