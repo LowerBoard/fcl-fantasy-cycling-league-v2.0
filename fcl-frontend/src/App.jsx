@@ -58,7 +58,7 @@ let fauxOtherTeamPoints = [
 
 function App() {
   const [userSignedIn, setUserSignedIn] = useState(false);
-  const [ridersAvailable, setRidersAvailable] = useState(riderPool);
+  const [ridersAvailable, setRidersAvailable] = useState([]);
   const [userTeam, setUserTeam] = useState([]);
   const [userTeamName, setUserTeamName] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
