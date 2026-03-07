@@ -1,0 +1,20 @@
+# --- Frontend (React/Vite) ---
+# These cover everything in your fcl-frontend/src/.gitignore
+fcl-frontend/node_modules/
+fcl-frontend/dist/
+fcl-frontend/dist-ssr/
+fcl-frontend/*.local
+fcl-frontend/.env
+
+# --- Backend (Spring Boot/Java) ---
+# These cover everything in your fcl-backend/.gitignore
+fcl-backend/target/
+fcl-backend/!.mvn/wrapper/maven-wrapper.jar
+fcl-backend/build/
+fcl-backend/.help/
+fcl-backend/*.iml
+fcl-backend/.idea/
+
+# --- General System Files ---
+.DS_Store
+*.log
