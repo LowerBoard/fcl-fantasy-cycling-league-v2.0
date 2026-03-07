@@ -36,5 +36,5 @@ public class RosterController {
                 .orElseThrow(() -> new RuntimeException("Roster not found with id " + id));
         roster.setRiders(riderRepository.findAllById(riderIds));
         return rosterRepository.save(roster);
-    }
+    } // Update the riders in the roster by providing a list of rider IDs
 }
