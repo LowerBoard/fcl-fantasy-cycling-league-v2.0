@@ -1,26 +1,40 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from '../api';
 
 
-function Registration({userTeamName, setUserSignedIn, setUserTeamName, errorMessage, setErrorMessage}) {
+function Registration({setCurrentUser, setUserSignedIn, errorMessage, setErrorMessage}) {
 
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const [userName, setUserName] = useState('');
   const navigate = useNavigate();
 
   
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorMessage('');
 
-    if (userEmail && userPassword && userTeamName) {
-      alert('Thanks for signing up. Welcome to the League!');
+    try{
+      const response = await api.post('/users/register', {
+        username: userName,
+        email: userEmail,
+        password: userPassword
+      });
+
+      const newUser = response.data
+
+      setCurrentUser(newUser);
       setUserSignedIn(true);
+
+      alert("Welcome to the FCL Peloton" + newUser.username + "! Allez Allez Allez!");
       navigate("/dashboard");
-    } else {
-      setErrorMessage(`All Fields Must Be Filled Out`);
-  }
+
+    } catch (err) {
+        console.error("Registration Failed: ", err);
+        setErrorMessage("Registration failed. Email/Username may be in use!")
+    } 
   };
 
   return (
@@ -54,14 +68,14 @@ function Registration({userTeamName, setUserSignedIn, setUserTeamName, errorMess
               </label>
             </div>
             <div className='m-1 flex justify-end'>
-              <label>Team Name:
+              <label>User Name:
                 <input
                 type='text'
-                id='teamname'
+                id='username'
                 placeholder=''
-                value={userTeamName}
+                value={userName}
                 className='bg-white border-green-700 border-2 rounded-md'
-                onChange={(e) => setUserTeamName(e.target.value)}
+                onChange={(e) => setUserName(e.target.value)}
                 />
               </label>
             </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import CyclistRow from './cyclistRow';
 
-function TeamPage({userTeam, setUserTeam, setRidersAvailable, userTeamName, setUserTeamName}) {
+function TeamPage({userTeam, setUserTeam, setRidersAvailable, currentUser, setCurrentUser}) {
   const handleRemoveRider = (riderId) => {
     const riderToRemove = userTeam.find(r => r.id === riderId);
     if(!riderToRemove) return;
@@ -13,7 +13,7 @@ function TeamPage({userTeam, setUserTeam, setRidersAvailable, userTeamName, setU
   return (
     <div className='flex flex-col items-center  mt-4 mb-10'>
         <section className='flex flex-col items-center'>  
-          <h1 className='font-fasterone text-red-700 text-center text-3xl lg:text-7xl text-shadow-lg/25' >The {userTeamName} Team Page</h1>
+          <h1 className='font-fasterone text-red-700 text-center text-3xl lg:text-7xl text-shadow-lg/25' >{currentUser?.username}'s Squad</h1>
           <p className='font-fasterone text-sky-700 text-xl lg-text-2xl text-center text-balance text-shadow-lg/50' >----Hold Up to 7 Riders----</p>
         </section>  
         <section className='flex flex-col items-center'>
@@ -22,13 +22,13 @@ function TeamPage({userTeam, setUserTeam, setRidersAvailable, userTeamName, setU
           <thead className='bg-yellow-400 w-full'>
             <tr className='border-yellow-600 border-3'>
                 <th className='border-green-600 border-2'>
-                    Rider + Country
+                    Rider
                 </th>
                 <th className='border-green-600 border-2'>
-                    Team
+                    Pro Team
                 </th>
                 <th className='border-green-600 border-2'>
-                    Cost
+                    Points
                 </th>
                 <th className='border-green-600 border-2'>
                     Remove

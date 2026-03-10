@@ -1,25 +1,34 @@
 import React from 'react';
 import { useState } from 'react';
 import { Navigate, useNavigate, Link } from 'react-router-dom';
+import api from '../api';
 
-function Login({setUserSignedIn, setUserTeamName, userTeamName, setErrorMessage, errorMessage}) {
+function Login({setUserSignedIn, setCurrentUser, setErrorMessage, errorMessage}) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         setErrorMessage('');
 
-        if (email === 'chris@chris.com' && password === '123') {
+        try{
+            const response = await api.post('/users/login', {
+                email: email,
+                password: password
+            });
+
+            const user= response.data;
+
+            setCurrentUser(user);
             setUserSignedIn(true);
-            setUserTeamName('Back Of The Pack Cycling');
             navigate("/dashboard");
-            } else {
-            setErrorMessage(`Invalid Login!`);
-            }
+        } catch (error) {
+            console.error("Login failed: ", error);
+            setErrorMessage("Incorrect Login Info!")
+        }
     };
 
     const goToRegistration = () => {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Dashboard({userSignedIn, userTeam, fauxOtherTeamPoints, userTeamPoints, setUserTeamPoints}) {
+function Dashboard({userSignedIn, userTeam, fauxOtherTeamPoints, userTeamPoints, setUserTeamPoints, currentUser}) {
 
   const sortedStandings = fauxOtherTeamPoints.sort((a,b) => b.points - a.points)
 
@@ -23,7 +23,7 @@ function Dashboard({userSignedIn, userTeam, fauxOtherTeamPoints, userTeamPoints,
           <thead className='bg-yellow-400 w-full'>
             <tr className='border-yellow-600 border-3'>
                 <th className='border-green-600 border-2'>
-                    Rider + Country
+                    Rider
                 </th>
                 <th className='border-green-600 border-2'>
                     Team
@@ -38,10 +38,10 @@ function Dashboard({userSignedIn, userTeam, fauxOtherTeamPoints, userTeamPoints,
                 userTeam.map(rider => (
                   <tr>
                     <td>
-                      {rider.name} - {rider.country}
+                      {rider.name}
                     </td>
                     <td>
-                      {rider.team}
+                      {rider.proTeam}
                     </td> 
                     <td>
                       {rider.points}

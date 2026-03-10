@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import fclLogo from '../assets/FCLlogo1.png';
 
 
-function Nav({setUserSignedIn, setUserTeamName}) {
+function Nav({setUserSignedIn, setCurrentUser}) {
     
     const navigate = useNavigate();
 

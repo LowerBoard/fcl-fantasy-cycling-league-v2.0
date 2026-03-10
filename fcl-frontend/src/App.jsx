@@ -11,7 +11,7 @@ import './App.css'
 import './components/Nav.css'
 import NavNotSignedIn from './components/NavNotSignedIn';
 import RidersAvailable from './components/RidersAvailable';
-import RiderService from './RiderService';
+import RiderService from './Services/RiderService';
 
 const fauxOtherTeamPoints = [];
 
@@ -19,7 +19,7 @@ function App() {
   const [userSignedIn, setUserSignedIn] = useState(false);
   const [ridersAvailable, setRidersAvailable] = useState([]);
   const [userTeam, setUserTeam] = useState([]);
-  const [userTeamName, setUserTeamName] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [userTeamPoints, setUserTeamPoints] = useState(0)
   const [selectedRaceId, setSelectedRaceId] = useState(1);
@@ -53,13 +53,13 @@ useEffect(() => {
       <div className='flex flex-col h-auto min-h-screen'>
         <main>
           <Routes>
-            <Route path="/" element={<Login setUserSignedIn={setUserSignedIn} setUserTeamName={setUserTeamName} userTeamName={userTeamName} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />} />
+            <Route path="/" element={<Login setUserSignedIn={setUserSignedIn} setCurrentUser={setCurrentUser} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />} />
             <Route path="/about" element={<About />}/>
-            <Route path="/dashboard" element={<Dashboard userSignedIn={userSignedIn} userTeam={userTeam} fauxOtherTeamPoints={fauxOtherTeamPoints} userTeamPoints={userTeamPoints} setUserTeamPoints={setUserTeamPoints} />} />
-            <Route path="/registration" element={<Registration setUserSignedIn={setUserSignedIn} setUserTeamName={setUserTeamName} userTeamName={userTeamName} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />}/>
+            <Route path="/dashboard" element={<Dashboard userSignedIn={userSignedIn} userTeam={userTeam} fauxOtherTeamPoints={fauxOtherTeamPoints} userTeamPoints={userTeamPoints} setUserTeamPoints={setUserTeamPoints} currentUser={currentUser} />} />
+            <Route path="/registration" element={<Registration setUserSignedIn={setUserSignedIn} setCurrentUser={setCurrentUser} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />}/>
             <Route path="/ridersavailable" element={<RidersAvailable ridersAvailable={ridersAvailable} setUserTeam={setUserTeam} setRidersAvailable={setRidersAvailable} isRosterFull={isRosterFull}/>}/>
-            <Route path="/teampage" element={<TeamPage userTeam={userTeam} setUserTeam={setUserTeam} setRidersAvailable={setRidersAvailable} isRosterFull={isRosterFull} setUserTeamName={setUserTeamName} userTeamName={userTeamName}/>}/>
-            <Route path="/nav" element={<Nav setUserSignedIn={setUserSignedIn} setUserTeamName={setUserTeamName} />}/>
+            <Route path="/teampage" element={<TeamPage userTeam={userTeam} setUserTeam={setUserTeam} setRidersAvailable={setRidersAvailable} isRosterFull={isRosterFull} setCurrentUser={setCurrentUser} currentUser={currentUser}/>}/>
+            <Route path="/nav" element={<Nav setUserSignedIn={setUserSignedIn} setCurrentUser={setCurrentUser} currentUser={currentUser} />}/>
             <Route path="/navnotsignedin" element={<NavNotSignedIn setErrorMessage={setErrorMessage} />}/>
           </Routes>
         </main>
