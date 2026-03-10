@@ -5,3 +5,5 @@ const RiderService = {
         return api.get(`/riders/race/${raceId}`);
     }
 };
+
+export default RiderService;

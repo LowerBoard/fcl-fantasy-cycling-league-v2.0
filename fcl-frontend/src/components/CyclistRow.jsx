@@ -31,10 +31,10 @@ function cyclistRow({rider, onAction, actionType}) {
     
         <tr>
             <td>
-                {rider.name} - {rider.country}
+                {rider.name}
             </td>
-            <td>{rider.team}</td> 
-            <td>${rider.cost}</td>
+            <td>{rider.proTeam}</td> 
+            <td>{rider.points}</td>
             <td>
                 <button 
                     onClick={() => onAction(rider.id)}

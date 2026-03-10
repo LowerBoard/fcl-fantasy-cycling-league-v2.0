@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin // This annotation allows cross-origin requests from the frontend (which is likely running on a different port)
+@CrossOrigin(origins = "http://localhost:5173") // This annotation allows cross-origin requests from the frontend (which is likely running on a different port)
 public class UserController {
 
     @Autowired

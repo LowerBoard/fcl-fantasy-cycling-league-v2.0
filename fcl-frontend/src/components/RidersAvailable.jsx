@@ -27,13 +27,13 @@ function RidersAvailable({ridersAvailable, setRidersAvailable, setUserTeam, isRo
             <thead className='bg-yellow-400 w-full'>
                 <tr className='border-yellow-600 border-3'>
                     <th className='border-green-600 border-2'>
-                        Rider - Country
+                        Rider 
                     </th>
                     <th className='border-green-600 border-2'>
-                        Team
+                        Pro Team
                     </th>
                     <th className='border-green-600 border-2'>
-                        Cost
+                        Points
                     </th>
                     <th className='border-green-600 border-2'>
                         Add
@@ -42,14 +42,22 @@ function RidersAvailable({ridersAvailable, setRidersAvailable, setUserTeam, isRo
             </thead>
             
             <tbody className='w-full bg-yellow-200'>
-                {ridersAvailable.sort((a,b) => b.cost - a.cost).map(rider => (
-                    <CyclistRow 
-                    key={rider.id}
-                    rider={rider}
-                    onAction={handleAddRider}
-                    actionType={isRosterFull ? 'disabled' : 'add'}
+                {Array.isArray(ridersAvailable) ? (
+                    ridersAvailable
+                        .sort((a,b) => b.points - a.points)
+                        .map(rider => (
+                            <CyclistRow 
+                            key={rider.id}
+                            rider={rider}
+                            onAction={handleAddRider}
+                            actionType={isRosterFull ? 'disabled' : 'add'}
                 />
                 ))
+            ) : (
+                <tr>
+                    <td>Loading the groupetto...</td>
+                </tr>
+            )
                 }
             </tbody>
 

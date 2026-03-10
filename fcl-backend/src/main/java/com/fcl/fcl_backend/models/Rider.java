@@ -1,5 +1,6 @@
 package com.fcl.fcl_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class Rider {
     private int points;
 
     @ManyToMany
+    @JsonIgnoreProperties("riders") //
     @JoinTable(
             name = "rider_races",
             joinColumns = @JoinColumn(name = "rider_id"),

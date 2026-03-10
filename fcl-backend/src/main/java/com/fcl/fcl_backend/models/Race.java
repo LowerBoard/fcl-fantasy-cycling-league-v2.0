@@ -1,5 +1,6 @@
 package com.fcl.fcl_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public class Race {
     private LocalDate date;
 
     @ManyToMany(mappedBy = "races")
+    @JsonIgnoreProperties("races") // This annotation is used to prevent infinite recursion during JSON serialization
     private List<Rider> riders;
 
 
