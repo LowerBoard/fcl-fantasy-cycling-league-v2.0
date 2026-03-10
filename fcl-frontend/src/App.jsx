@@ -47,7 +47,7 @@ useEffect(() => {
     <div className='bg-[url(./assets/pexels-krizz59-12838.jpg)] bg-cover bg-fixed'>
       <div className='sticky top-0 left-0 right-0'>
         <header>
-          {userSignedIn ? <Nav setUserSignedIn={setUserSignedIn} /> : <NavNotSignedIn />}
+          {userSignedIn && currentUser ? (<Nav setUserSignedIn={setUserSignedIn} currentUser={currentUser} setCurrentUser={setCurrentUser} />) : (<NavNotSignedIn />)}
         </header>
       </div>
       <div className='flex flex-col h-auto min-h-screen'>
