@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
@@ -63,6 +63,21 @@ function App() {
   const [userTeamName, setUserTeamName] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [userTeamPoints, setUserTeamPoints] = useState(0)
+  const [selectedRaceId, setSelectedRaceId] = useState(1);
+  const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  setLoading(true);
+  RiderService.getRidersByRace(selectedRaceId)
+    .then(response => {
+      setRidersAvailable(response.data);
+      setLoading(false);
+    })
+    .catch(err => {
+      console.error("Flat tire! Bummer...", err);
+      setLoading(false);
+    });
+}, [selectedRaceId]);
 
   const maxTeamSize = 7;
   const isRosterFull = userTeam.length >= maxTeamSize;

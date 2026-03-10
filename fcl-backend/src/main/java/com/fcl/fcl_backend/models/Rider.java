@@ -1,9 +1,8 @@
 package com.fcl.fcl_backend.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity // tells JPA that this class is an entity and should be mapped to a database table
 public class Rider {
@@ -16,6 +15,15 @@ public class Rider {
     private String proTeam;
     private int points;
 
+    @ManyToMany
+    @JoinTable(
+            name = "rider_races",
+            joinColumns = @JoinColumn(name = "rider_id"),
+            inverseJoinColumns = @JoinColumn(name = "race_id")
+    )
+    private List<Race> races;
+
+
     public Rider() {
     }
 
@@ -23,6 +31,14 @@ public class Rider {
         this.name = name;
         this.proTeam = proTeam;
         this.points = points;
+    }
+
+    public List<Race> getRaces() {
+        return races;
+    }
+
+    public void setRaces(List<Race> races) {
+        this.races = races;
     }
 
     public Long getId() {
