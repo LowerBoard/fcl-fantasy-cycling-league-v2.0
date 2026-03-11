@@ -47,7 +47,7 @@ useEffect(() => {
     <div className='bg-[url(./assets/pexels-krizz59-12838.jpg)] bg-cover bg-fixed'>
       <div className='sticky top-0 left-0 right-0'>
         <header>
-          {userSignedIn && currentUser ? (<Nav setUserSignedIn={setUserSignedIn} currentUser={currentUser} setCurrentUser={setCurrentUser} />) : (<NavNotSignedIn />)}
+          {userSignedIn && currentUser ? (<Nav setUserSignedIn={setUserSignedIn} currentUser={currentUser} setCurrentUser={setCurrentUser} />) : (<NavNotSignedIn setErrorMessage={setErrorMessage} />)}
         </header>
       </div>
       <div className='flex flex-col h-auto min-h-screen'>
@@ -59,8 +59,6 @@ useEffect(() => {
             <Route path="/registration" element={<Registration setUserSignedIn={setUserSignedIn} setCurrentUser={setCurrentUser} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />}/>
             <Route path="/ridersavailable" element={<RidersAvailable ridersAvailable={ridersAvailable} setUserTeam={setUserTeam} setRidersAvailable={setRidersAvailable} isRosterFull={isRosterFull}/>}/>
             <Route path="/teampage" element={<TeamPage userTeam={userTeam} setUserTeam={setUserTeam} setRidersAvailable={setRidersAvailable} isRosterFull={isRosterFull} setCurrentUser={setCurrentUser} currentUser={currentUser}/>}/>
-            <Route path="/nav" element={<Nav setUserSignedIn={setUserSignedIn} setCurrentUser={setCurrentUser} currentUser={currentUser} />}/>
-            <Route path="/navnotsignedin" element={<NavNotSignedIn setErrorMessage={setErrorMessage} />}/>
           </Routes>
         </main>
       </div>
