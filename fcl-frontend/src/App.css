@@ -1,0 +1,10 @@
+
+@import 'tailwindcss';
+
+@theme {
+    --font-fasterone: 'Faster One', system-ui, sans-serif;
+    --font-monofett: "Monofett", monospace, sans-serif;
+    --font-roboto: "Roboto Condensed", sans-serif;
+}
+
+

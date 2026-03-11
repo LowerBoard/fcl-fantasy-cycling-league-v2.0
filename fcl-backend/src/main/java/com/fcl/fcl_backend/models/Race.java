@@ -1,8 +1,10 @@
 package com.fcl.fcl_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "races")
@@ -17,11 +19,24 @@ public class Race {
 
     private LocalDate date;
 
+    @ManyToMany(mappedBy = "races")
+    @JsonIgnoreProperties("races") // This annotation is used to prevent infinite recursion during JSON serialization
+    private List<Rider> riders;
+
+
     public Race() {}
 
     public Race(String name, LocalDate date) {
         this.name = name;
         this.date = date;
+    }
+
+    public List<Rider> getRiders() {
+        return riders;
+    }
+
+    public void setRiders(List<Rider> riders) {
+        this.riders = riders;
     }
 
     public Long getId() {

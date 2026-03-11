@@ -22,9 +22,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @JsonManagedReference("user-teams")
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserTeam> userTeams;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference("user-team-single") // This annotation is used to manage the bidirectional relationship between User and UserTeam. It prevents infinite recursion during JSON serialization by marking this side of the relationship as the "managed" side.
+    private UserTeam userTeam;
 
     public User() {}
 
@@ -34,20 +34,20 @@ public class User {
         this.password = password;
     }
 
+    public UserTeam getUserTeam() {
+        return userTeam;
+    }
+
+    public void setUserTeam(UserTeam userTeam) {
+        this.userTeam = userTeam;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public List<UserTeam> getUserTeams() {
-        return userTeams;
-    }
-
-    public void setUserTeams(List<UserTeam> userTeams) {
-        this.userTeams = userTeams;
     }
 
     public String getUsername() {
