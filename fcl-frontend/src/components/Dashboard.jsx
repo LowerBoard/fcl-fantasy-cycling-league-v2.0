@@ -36,7 +36,7 @@ function Dashboard({userSignedIn, userTeam, fauxOtherTeamPoints, userTeamPoints,
           <tbody className='w-full bg-yellow-200'>
             {userTeam.length > 0 ? (
                 userTeam.map(rider => (
-                  <tr>
+                  <tr key={rider.id}>
                     <td>
                       {rider.name}
                     </td>

@@ -27,7 +27,7 @@ function Login({setUserSignedIn, setCurrentUser, setErrorMessage, errorMessage})
             navigate("/dashboard");
         } catch (error) {
             console.error("Login failed: ", error);
-            setErrorMessage("Incorrect Login Info!")
+            setErrorMessage("Login Failed, try again")
         }
     };
 

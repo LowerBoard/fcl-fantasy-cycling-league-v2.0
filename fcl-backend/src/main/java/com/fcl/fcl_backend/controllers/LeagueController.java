@@ -1,8 +1,11 @@
 package com.fcl.fcl_backend.controllers;
 
 import com.fcl.fcl_backend.models.League;
+import com.fcl.fcl_backend.models.UserTeam;
 import com.fcl.fcl_backend.repositories.LeagueRepository;
+import com.fcl.fcl_backend.repositories.UserTeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +18,9 @@ public class LeagueController {
     @Autowired
     private LeagueRepository leagueRepository;
 
+    @Autowired
+    private UserTeamRepository userTeamRepository;
+
     @GetMapping
     public List<League> getAllLeagues() {
         return leagueRepository.findAll();
@@ -23,5 +29,11 @@ public class LeagueController {
     @PostMapping
     public League createLeague(@RequestBody League league) {
         return leagueRepository.save(league);
+    }
+
+    @GetMapping("/{leagueId}/standings")
+    public ResponseEntity<?> getStandingsByLeague(@PathVariable Long leagueId) {
+        List<UserTeam> leagueMembers = userTeamRepository.findByLeagueId(leagueId);
+        return ResponseEntity.ok(leagueMembers);
     }
 }
