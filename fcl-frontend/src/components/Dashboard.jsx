@@ -101,8 +101,8 @@ function Dashboard({userSignedIn, userTeam, currentUser}) {
             {leagueStandings.map((team, index) => (
               <tr key={team.id}>
                 <td>{index + 1}</td>
-                <td>{team.teamname}</td>
-                <td>{team.points}</td>
+                <td>{team.teamName}</td>
+                <td>{team.totalPoints}</td>
               </tr>
             ))}
           </tbody>     
