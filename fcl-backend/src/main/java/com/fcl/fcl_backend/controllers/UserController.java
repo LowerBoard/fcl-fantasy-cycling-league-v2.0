@@ -24,7 +24,12 @@ public class UserController {
     public ResponseEntity<?> loginUser(@RequestBody User loginCredentials) {
         return userRepository.findByEmail(loginCredentials.getEmail())
                 .filter(user -> user.getPassword().equals(loginCredentials.getPassword())) // Check if the password matches
-                .map(user -> ResponseEntity.ok(user))// If the user is found and the password matches, return the user object with a 200 OK status
+                .map(user -> {
+                    if (user.getUserTeam() != null) {
+                        user.getUserTeam().getId();
+                    }
+                    return ResponseEntity.ok(user);
+                })// If the user is found and the password matches, return the user object with a 200 OK status
                 .orElse(ResponseEntity.status(401).build()); // If the user is not found or the password does not match, return a 401 Unauthorized status
     }
 
@@ -43,6 +48,8 @@ public class UserController {
             newTeam.setLeague(defaultLeague);
 
             userTeamRepository.save(newTeam); // Save the new UserTeam to the database
+
+            savedUser.setUserTeam(newTeam);
 
             return ResponseEntity.ok(savedUser); // Return the saved user object with a 200 OK status
         }

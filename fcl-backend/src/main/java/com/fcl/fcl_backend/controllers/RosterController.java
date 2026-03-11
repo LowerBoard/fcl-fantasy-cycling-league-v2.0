@@ -1,11 +1,16 @@
 package com.fcl.fcl_backend.controllers;
 
 import com.fcl.fcl_backend.models.Roster;
+import com.fcl.fcl_backend.repositories.RaceRepository;
 import com.fcl.fcl_backend.repositories.RiderRepository;
 import com.fcl.fcl_backend.repositories.RosterRepository;
+import com.fcl.fcl_backend.repositories.UserTeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,6 +24,12 @@ public class RosterController {
     @Autowired
     private RiderRepository riderRepository;
 
+    @Autowired
+    private RaceRepository raceRepository;
+
+    @Autowired
+    private UserTeamRepository userTeamRepository;
+
     @PostMapping
     public Roster createRoster(@RequestBody Roster roster) {
         return rosterRepository.save(roster);
@@ -28,6 +39,22 @@ public class RosterController {
     public Roster getRosterById(@PathVariable Long id) {
         return rosterRepository.findById(id).orElse(null);
     } // Retrieve roster by ID
+
+    @GetMapping("/userteam/{teamId}/race/{raceId}")
+    public ResponseEntity<Roster> getOrCreateRoster(@PathVariable Long teamId, @PathVariable Long raceId) {
+        return rosterRepository.findByUserTeamIdAndRaceId(teamId, raceId)
+                .map(ResponseEntity::ok) // If a roster is found, return it with a 200 OK status
+                .orElseGet(() -> {
+                    Roster newRoster = new Roster();
+
+                    newRoster.setUserTeam(userTeamRepository.findById(teamId).orElseThrow());// Set the user team for the roster, throwing an exception if the team is not found
+                    newRoster.setRace(raceRepository.findById(raceId).orElseThrow()); // Set the race for the roster, throwing an exception if the race is not found
+                    newRoster.setRiders(new ArrayList<>());
+
+                    Roster savedRoster = rosterRepository.saveAndFlush(newRoster);
+                    return new ResponseEntity<>(savedRoster, HttpStatus.CREATED);
+                }); // Return the newly created roster with a 201 Created status
+    }
 
     @PutMapping("/{id}/riders")
     public Roster updateRosterRiders(@PathVariable Long id, @RequestBody List<Long> riderIds) {

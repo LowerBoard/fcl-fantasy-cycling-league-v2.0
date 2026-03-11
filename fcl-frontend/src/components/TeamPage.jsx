@@ -1,7 +1,8 @@
 import React from 'react';
 import CyclistRow from './cyclistRow';
+import RosterService from '../Services/RosterService';
 
-function TeamPage({userTeam, setUserTeam, setRidersAvailable, currentUser, setCurrentUser}) {
+function TeamPage({userTeam, setUserTeam, setRidersAvailable, currentUser, currentRosterId}) {
   const handleRemoveRider = (riderId) => {
     const riderToRemove = userTeam.find(r => r.id === riderId);
     if(!riderToRemove) return;
@@ -9,6 +10,27 @@ function TeamPage({userTeam, setUserTeam, setRidersAvailable, currentUser, setCu
     setUserTeam(prevTeam => prevTeam.filter(r => r.id !== riderId));
     setRidersAvailable(prevRiders => [...prevRiders, riderToRemove]);
   }
+
+  const handleSaveRoster = async () => {
+    if (!currentRosterId) {
+      alert("Still loading... refresh...");
+      return;
+    }
+
+    if (userTeam.length <= 0) {
+      alert("You need at least 1 rider to save your roster!");
+      return;
+    }
+
+    const riderIds = userTeam.map(rider => rider.id);
+
+    try {
+      await RosterService.updateRoster(currentRosterId, riderIds);
+      alert("Roster Saved! Time to hammer down!");
+    } catch (e) {
+      console.error("Flat tire:", e);
+    }
+  };
 
   return (
     <div className='flex flex-col items-center  mt-4 mb-10'>
@@ -56,6 +78,14 @@ function TeamPage({userTeam, setUserTeam, setRidersAvailable, currentUser, setCu
               }
             </tbody>
         </table>
+        {userTeam.length > 0 && (
+          <button
+            onClick={handleSaveRoster}
+            className='mt-8 bg-red-700 text-yellow-200 font-fasterone px-10 py-3 rounded-full hover:bg-green-700 hover:scale-110 transition-all border-2 border-yellow-200 shadow-xl'
+            >
+            SAVE ROSTER
+            </button>
+        )}
         </section>
     </div>
   );

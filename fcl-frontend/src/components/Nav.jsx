@@ -4,7 +4,7 @@ import fclLogo from '../assets/FCLlogo1.png';
 
 
 
-function Nav({setUserSignedIn, setCurrentUser, currentUser}) {
+function Nav({setUserSignedIn, setCurrentUser, currentUser, setCurrentRosterId, setUserTeam}) {
     
     const navigate = useNavigate();
 
@@ -12,6 +12,8 @@ function Nav({setUserSignedIn, setCurrentUser, currentUser}) {
     const handleClick = () => {
         setCurrentUser(null);
         setUserSignedIn(false);
+        setUserTeam([])
+        setCurrentRosterId(null);
         navigate("/about");
     }
     

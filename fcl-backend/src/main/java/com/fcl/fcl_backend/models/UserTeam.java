@@ -20,9 +20,10 @@ public class UserTeam {
     @Column
     private Double totalPoints = 0.0;
 
-    @JsonBackReference("user-teams") // This annotation is used to manage the bidirectional relationship between UserTeam and User. It prevents infinite recursion during JSON serialization by marking this side of the relationship as the "back" side.
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    @JsonBackReference("user-team-single") // This annotation is used to manage the bidirectional relationship between UserTeam and User. It prevents infinite recursion during JSON serialization by marking this side of the relationship as the "back" side.)
     private User user;
 
     @JsonBackReference("league-teams") // This annotation is used to manage the bidirectional relationship between UserTeam and League. It prevents infinite recursion during JSON serialization by marking this side of the relationship as the "back" side.

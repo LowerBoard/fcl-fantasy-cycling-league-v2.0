@@ -1,7 +1,7 @@
 import React from 'react';
 import CyclistRow from './cyclistRow';
 
-function RidersAvailable({ridersAvailable, setRidersAvailable, setUserTeam, isRosterFull}) {
+function RidersAvailable({ridersAvailable, setRidersAvailable, setUserTeam, isRosterFull, currentRosterId}) {
     const handleAddRider = (riderId) => {
         if(isRosterFull) {
             return;
