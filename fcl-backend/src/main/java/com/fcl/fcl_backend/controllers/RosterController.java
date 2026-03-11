@@ -6,7 +6,6 @@ import com.fcl.fcl_backend.repositories.RosterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.sql.RowSetReader;
 import java.util.List;
 
 @RestController

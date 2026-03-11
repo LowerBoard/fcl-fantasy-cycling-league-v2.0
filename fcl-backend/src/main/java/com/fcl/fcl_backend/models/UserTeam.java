@@ -31,7 +31,7 @@ public class UserTeam {
     private League league;
 
     @JsonManagedReference("team-rosters") // This annotation is used to manage the bidirectional relationship between UserTeam and Roster. It prevents infinite recursion during JSON serialization by marking this side of the relationship as the "managed" side.
-    @OneToMany(mappedBy = "userTeam", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userTeam", cascade = CascadeType.ALL) // This annotation specifies that when a UserTeam is deleted, all associated Roster entities should also be deleted (cascade = CascadeType.ALL). The mappedBy attribute indicates that the relationship is managed by the userTeam field in the Roster class.
     private List<Roster> rosters;
 
     public UserTeam() {}
