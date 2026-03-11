@@ -1,8 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import LeagueService from '../Services/LeagueService';
 
-function Dashboard({userSignedIn, userTeam, fauxOtherTeamPoints, userTeamPoints, setUserTeamPoints, currentUser}) {
+function Dashboard({userSignedIn, userTeam, currentUser}) {
 
-  const sortedStandings = fauxOtherTeamPoints.sort((a,b) => b.points - a.points)
+  const [leagueStandings, setLeagueStandings] = useState([]);
+
+  useEffect(() => {
+    const currentLeagueId = currentUser?.userTeam?.league?.id || 1;
+
+    if (userSignedIn) {
+      LeagueService.getStandings(currentLeagueId)
+      .then(data => {
+        const rankedTeams = data.sort((a,b) => b.totalPoints - a.totalPoints);
+        setLeagueStandings(rankedTeams);
+      })
+      .catch(err => console.error("Failed to load:", err));
+    }
+  }, [userSignedIn, currentUser]);
 
   const pointsTotal = userTeam.reduce((total, rider) => {
     return total + rider.points;
@@ -84,7 +98,7 @@ function Dashboard({userSignedIn, userTeam, fauxOtherTeamPoints, userTeamPoints,
             </tr>
           </thead>
           <tbody className='bg-yellow-200 w-full'>
-            {sortedStandings.map((team, index) => (
+            {leagueStandings.map((team, index) => (
               <tr key={team.id}>
                 <td>{index + 1}</td>
                 <td>{team.teamname}</td>
