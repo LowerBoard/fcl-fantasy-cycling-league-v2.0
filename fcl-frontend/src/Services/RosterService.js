@@ -11,8 +11,8 @@ const RosterService = {
         return response.data;
     },
 
-    deleteRider: async (rosterId, riderId) => {
-        const response = await api.delete(`/roster/${rosterId}/riders/${riderId}`)
+    dropRider: async (rosterId, riderId) => {
+        const response = await api.delete(`/rosters/${rosterId}/riders/${riderId}`)
         return response.data;
     }
 };

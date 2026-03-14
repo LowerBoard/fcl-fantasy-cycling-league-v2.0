@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import LeagueService from '../Services/LeagueService';
+import RosterService from '../Services/RosterService';
 
-function Dashboard({userSignedIn, userTeam, currentUser}) {
+function Dashboard({userSignedIn, userTeam, setUserTeam, currentUser}) {
 
   const [leagueStandings, setLeagueStandings] = useState([]);
 
@@ -45,6 +46,9 @@ function Dashboard({userSignedIn, userTeam, currentUser}) {
                 <th className='border-green-600 border-2'>
                     Points
                 </th>
+                <th className='border-green-600 border-2'>
+                    -
+                </th>
             </tr>
           </thead>
           <tbody className='w-full bg-yellow-200'>
@@ -59,6 +63,18 @@ function Dashboard({userSignedIn, userTeam, currentUser}) {
                     </td> 
                     <td>
                       {rider.points}
+                    </td>
+                    <td className='p-2'>
+                      <button
+                        className='bg-red-600 text-white font-bold py-1 px-3 rounded hover:bg-red-800 transition-colors'
+                        onClick={() => {
+                          RosterService.dropRider(currentUser?.userTeam?.rosters?.[0]?.id, rider.id)
+                          .then(() => {
+                            setUserTeam(prevTeam => prevTeam.filter(r => r.id !== rider.id)) // removes the rider 
+                          });
+                        }}>
+                        Drop
+                      </button>
                     </td>
                   </tr>
                 ))
@@ -76,6 +92,7 @@ function Dashboard({userSignedIn, userTeam, currentUser}) {
               <td></td>
               <td>Total Points</td>
               <td>{pointsTotal}</td>
+              <td></td>
             </tr>
           </tfoot>
         </table>
