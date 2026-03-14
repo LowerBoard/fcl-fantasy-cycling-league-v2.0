@@ -63,4 +63,14 @@ public class RosterController {
         roster.setRiders(riderRepository.findAllById(riderIds));
         return rosterRepository.save(roster);
     } // Update the riders in the roster by providing a list of rider IDs
+
+    @DeleteMapping("/{rosterId}/riders/{riderId}")
+    public ResponseEntity<?> removeRiderFromRoster(@PathVariable Long rosterId, @PathVariable Long riderId) {
+        Roster roster = rosterRepository.findById(rosterId)
+                .orElseThrow(() -> new RuntimeException("Roster not found with id " + rosterId));
+        roster.getRiders().removeIf(rider -> rider.getId().equals(riderId));
+        rosterRepository.save(roster);
+        return ResponseEntity.ok().build();
+    }
+
 }

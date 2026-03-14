@@ -78,7 +78,7 @@ useEffect(() => {
           <Routes>
             <Route path="/" element={<Login setUserSignedIn={setUserSignedIn} setCurrentUser={setCurrentUser} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />} />
             <Route path="/about" element={<About />}/>
-            <Route path="/dashboard" element={<Dashboard userSignedIn={userSignedIn} userTeam={userTeam} fauxOtherTeamPoints={fauxOtherTeamPoints} userTeamPoints={userTeamPoints} setUserTeamPoints={setUserTeamPoints} currentUser={currentUser} />} />
+            <Route path="/dashboard" element={<Dashboard userSignedIn={userSignedIn} userTeam={userTeam} setUserTeam={setUserTeam} userTeamPoints={userTeamPoints} setUserTeamPoints={setUserTeamPoints} currentUser={currentUser} />} />
             <Route path="/registration" element={<Registration setUserSignedIn={setUserSignedIn} setCurrentUser={setCurrentUser} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />}/>
             <Route path="/ridersavailable" element={<RidersAvailable ridersAvailable={ridersAvailable} setUserTeam={setUserTeam} setRidersAvailable={setRidersAvailable} isRosterFull={isRosterFull} currentRosterId={currentRosterId} />}/>
             <Route path="/teampage" element={<TeamPage userTeam={userTeam} setUserTeam={setUserTeam} setRidersAvailable={setRidersAvailable} isRosterFull={isRosterFull} setCurrentUser={setCurrentUser} currentUser={currentUser} currentRosterId={currentRosterId} />}/>
