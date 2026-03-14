@@ -9,6 +9,11 @@ const RosterService = {
     updateRoster: async (rosterId, riderIds) => {
         const response = await api.put(`/rosters/${rosterId}/riders`, riderIds);
         return response.data;
+    },
+
+    deleteRider: async (rosterId, riderId) => {
+        const response = await api.delete(`/roster/${rosterId}/riders/${riderId}`)
+        return response.data;
     }
 };
 
