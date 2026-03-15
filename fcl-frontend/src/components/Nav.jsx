@@ -36,6 +36,9 @@ function Nav({setUserSignedIn, setCurrentUser, currentUser, setCurrentRosterId, 
                         <Link to="/about">About</Link>
                     </li>
                     <li>
+                        <Link to="/strava">Strava Feed</Link>
+                    </li>
+                    <li>
                         <button type='button' onClick={handleClick}>Sign Out</button>
                     </li>
                 </ul>

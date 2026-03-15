@@ -13,6 +13,7 @@ import NavNotSignedIn from './components/NavNotSignedIn';
 import RidersAvailable from './components/RidersAvailable';
 import RiderService from './Services/RiderService';
 import RosterService from './Services/RosterService';
+import StravaFeed from './components/StravaFeed';
 
 const fauxOtherTeamPoints = [];
 
@@ -82,6 +83,7 @@ useEffect(() => {
             <Route path="/registration" element={<Registration setUserSignedIn={setUserSignedIn} setCurrentUser={setCurrentUser} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />}/>
             <Route path="/ridersavailable" element={<RidersAvailable ridersAvailable={ridersAvailable} setUserTeam={setUserTeam} setRidersAvailable={setRidersAvailable} isRosterFull={isRosterFull} currentRosterId={currentRosterId} />}/>
             <Route path="/teampage" element={<TeamPage userTeam={userTeam} setUserTeam={setUserTeam} setRidersAvailable={setRidersAvailable} isRosterFull={isRosterFull} setCurrentUser={setCurrentUser} currentUser={currentUser} currentRosterId={currentRosterId} />}/>
+            <Route path="/strava" element={<StravaFeed currentUser={currentUser} />} />
           </Routes>
         </main>
       </div>
