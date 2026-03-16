@@ -26,7 +26,6 @@ function Login({setUserSignedIn, setCurrentUser, setErrorMessage, errorMessage})
             setUserSignedIn(true);
             navigate("/dashboard");
         } catch (error) {
-            console.error("Login failed: ", error);
             setErrorMessage("Login Failed, try again")
         }
     };

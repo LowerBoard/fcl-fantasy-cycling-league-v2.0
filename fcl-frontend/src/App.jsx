@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
@@ -7,8 +7,8 @@ import TeamPage from './components/TeamPage';
 import Nav from './components/Nav';
 import Dashboard from './components/Dashboard';
 import About from './components/About';
-import './App.css'
-import './components/Nav.css'
+import './App.css';
+import './components/Nav.css';
 import NavNotSignedIn from './components/NavNotSignedIn';
 import RidersAvailable from './components/RidersAvailable';
 import RiderService from './Services/RiderService';
@@ -36,7 +36,6 @@ useEffect(() => {
       setLoading(false);
     })
     .catch(err => {
-      console.error("Flat tire! Bummer...", err);
       setRidersAvailable([]);
       setLoading(false);
     });
@@ -46,7 +45,6 @@ useEffect(() => {
   if (userSignedIn && currentUser?.userTeam?.id) {
     RosterService.getOrCreateRoster(currentUser.userTeam.id, selectedRaceId)
     .then(rosterData => {
-      console.log("Roster ID:", rosterData.id);
 
       setCurrentRosterId(rosterData.id);
       if (rosterData.riders && rosterData.riders.length > 0) {
@@ -59,7 +57,7 @@ useEffect(() => {
         setUserTeam([]);
       }
     })
-    .catch(err => console.error("failure loading roster", err));
+    .catch(err => {"..."});
   }
 }, [userSignedIn, selectedRaceId, currentUser]);
 

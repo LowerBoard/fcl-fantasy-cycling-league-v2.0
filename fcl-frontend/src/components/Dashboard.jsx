@@ -5,6 +5,7 @@ import RosterService from '../Services/RosterService';
 function Dashboard({userSignedIn, userTeam, setUserTeam, currentUser}) {
 
   const [leagueStandings, setLeagueStandings] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const currentLeagueId = currentUser?.userTeam?.league?.id || 1;
@@ -15,7 +16,9 @@ function Dashboard({userSignedIn, userTeam, setUserTeam, currentUser}) {
         const rankedTeams = data.sort((a,b) => b.totalPoints - a.totalPoints);
         setLeagueStandings(rankedTeams);
       })
-      .catch(err => console.error("Failed to load:", err));
+      .catch(err => {
+        setErrorMessage("Unable to load standings.")
+      });
     }
   }, [userSignedIn, currentUser]);
 
@@ -30,6 +33,7 @@ function Dashboard({userSignedIn, userTeam, setUserTeam, currentUser}) {
       <section className='flex flex-col items-center'>
         <h1 className='font-fasterone text-red-700 text-4xl lg:text-7xl text-shadow-lg/25'>Dashboard</h1>
         <p className='font-fasterone text-sky-700 text-2xl text-shadow-lg/50' >----a snapshot of your team and standings----</p>
+        {errorMessage && <p className='text-red-500 bg-red-100 p-2 rounded'>{errorMessage}</p>}
       </section>
       <div className='flex justify-center'>
       <section className='flex flex-col items-center m-2'>
