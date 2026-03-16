@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
@@ -7,8 +7,8 @@ import TeamPage from './components/TeamPage';
 import Nav from './components/Nav';
 import Dashboard from './components/Dashboard';
 import About from './components/About';
-import './App.css'
-import './components/Nav.css'
+import './App.css';
+import './components/Nav.css';
 import NavNotSignedIn from './components/NavNotSignedIn';
 import RidersAvailable from './components/RidersAvailable';
 import RiderService from './Services/RiderService';

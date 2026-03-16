@@ -1,9 +1,18 @@
 import React from 'react';
+import { useState } from 'react';
 import CyclistRow from './cyclistRow';
 import RosterService from '../Services/RosterService';
 
 function TeamPage({userTeam, setUserTeam, setRidersAvailable, currentUser, currentRosterId}) {
+  
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  
   const handleRemoveRider = (riderId) => {
+
+    setErrorMessage('');
+    setSuccessMessage('');
+
     const riderToRemove = userTeam.find(r => r.id === riderId);
     if(!riderToRemove) return;
 
@@ -12,13 +21,17 @@ function TeamPage({userTeam, setUserTeam, setRidersAvailable, currentUser, curre
   }
 
   const handleSaveRoster = async () => {
+
+    setErrorMessage('');
+    setSuccessMessage('');
+
     if (!currentRosterId) {
-      alert("Still loading... refresh...");
+      setErrorMessage("Still loading... refresh...");
       return;
     }
 
     if (userTeam.length <= 0) {
-      alert("You need at least 1 rider to save your roster!");
+      setErrorMessage("You need at least 1 rider to save your roster!");
       return;
     }
 
@@ -26,9 +39,9 @@ function TeamPage({userTeam, setUserTeam, setRidersAvailable, currentUser, curre
 
     try {
       await RosterService.updateRoster(currentRosterId, riderIds);
-      alert("Roster Saved! Time to hammer down!");
+      setSuccessMessage("Roster Saved! Time to hammer down!");
     } catch (e) {
-      console.error("Flat tire:", e);
+      setErrorMessage("Flat tire. Pump it up and try again.");
     }
   };
 
@@ -37,6 +50,10 @@ function TeamPage({userTeam, setUserTeam, setRidersAvailable, currentUser, curre
         <section className='flex flex-col items-center'>  
           <h1 className='font-fasterone text-red-700 text-center text-3xl lg:text-7xl text-shadow-lg/25' >{currentUser?.username}'s Squad</h1>
           <p className='font-fasterone text-sky-700 text-xl lg-text-2xl text-center text-balance text-shadow-lg/50' >----Hold Up to 7 Riders----</p>
+
+          {errorMessage && <p className='bg-red-200 text-red-800 p-2 mt-2 font-bold border-2 border-red-800 rounded'>{errorMessage}</p>}
+          {successMessage && <p className='bg-green-200 text-green-800 p-2 mt-2 font-bold border-2 border-green-800 rounded'>{successMessage}</p>}
+          
         </section>  
         <section className='flex flex-col items-center'>
           <p className='font-fasterone text-yellow-400 text-2xl lg-text-4xl text-shadow-lg/25 mb-2.5'>Your Team</p>
