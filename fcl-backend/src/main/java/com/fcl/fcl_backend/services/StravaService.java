@@ -29,7 +29,6 @@ public class StravaService {
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
             return response.getBody();
         } catch (Exception e) {
-            System.out.println("Error fetching Strava data: " + e.getMessage());
             return null;
         }
 
