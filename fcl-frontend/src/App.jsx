@@ -36,7 +36,6 @@ useEffect(() => {
       setLoading(false);
     })
     .catch(err => {
-      console.error("Flat tire! Bummer...", err);
       setRidersAvailable([]);
       setLoading(false);
     });
@@ -46,7 +45,6 @@ useEffect(() => {
   if (userSignedIn && currentUser?.userTeam?.id) {
     RosterService.getOrCreateRoster(currentUser.userTeam.id, selectedRaceId)
     .then(rosterData => {
-      console.log("Roster ID:", rosterData.id);
 
       setCurrentRosterId(rosterData.id);
       if (rosterData.riders && rosterData.riders.length > 0) {
@@ -59,7 +57,7 @@ useEffect(() => {
         setUserTeam([]);
       }
     })
-    .catch(err => console.error("failure loading roster", err));
+    .catch(err => {"..."});
   }
 }, [userSignedIn, selectedRaceId, currentUser]);
 

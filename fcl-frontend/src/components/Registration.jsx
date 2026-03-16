@@ -28,11 +28,10 @@ function Registration({setCurrentUser, setUserSignedIn, errorMessage, setErrorMe
       setCurrentUser(newUser);
       setUserSignedIn(true);
 
-      alert("Welcome to the FCL Peloton" + newUser.username + "! Allez Allez Allez!");
+      
       navigate("/dashboard");
 
     } catch (err) {
-        console.error("Registration Failed: ", err);
         setErrorMessage("Registration failed. Email/Username may be in use!")
     } 
   };

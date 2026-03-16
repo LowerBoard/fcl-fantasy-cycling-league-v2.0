@@ -3,6 +3,7 @@ import StravaService from '../Services/StravaService';
 
 function StravaFeed() {
     const [rides, setRides] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         StravaService.getRecentActivities()
