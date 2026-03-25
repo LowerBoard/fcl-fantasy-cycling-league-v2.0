@@ -72,7 +72,9 @@ Follow these steps to run the application locally on your machine.
     <h3></h3>
     <img src="assets/wireframes/fcl-wireframe.png" alt="FCL Wireframe" width="600"/>
 </div>
+
 <br></br>
+
 <em><b>Entity Relationship Diagram (ERD) </b>- 
 Mapping the bidirectional JPA relationships (One-to-Many, Many-to-Many) between Users, Teams, and Riders.</em>
 
@@ -129,6 +131,6 @@ While the core MVP successfully handles CRUD operations and basic API fetching, 
 
 <em>Automated OAuth 2.0 Handshake</em>: Currently, the Strava API integration requires a manual developer token exchange via terminal. The primary future feature is to build a dedicated Spring Boot redirect controller to handle the authorization_code grant type entirely behind the scenes, allowing users to connect their Strava with a single button click.
 
-<em>Real-Time Race Scoring</em>: If an API can be found, implementing an automated scheduled task to ping external race result APIs and automatically update rider points based on their real-world performance. If one cannot be found, develop an algorithim to pass along the points from an ADMIN page.
+<em>Real-Time Race Scoring + ADMIN Page</em>: If an API can be found, implementing an automated scheduled task to ping external race result APIs and automatically update rider points based on their real-world performance. If one cannot be found, develop an algorithim to pass along the points from an ADMIN page.
 
 <em>Refined Responsive Design</em>: Expanding on the current fluid typography to include fully collapsible mobile navigation menus and stacked data tables for smaller screens.
